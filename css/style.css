@@ -23,6 +23,7 @@
     --outer-shadow-0: 0 0 0 #d0d0d0, 0 0 0 #f8f8f8;
     --inner-shadow: inset 3px 3px 3px #d0d0d0, inset -3px -3px 3px #f8f8f8;
     --inner-shadow-0: inset 0 0 0 #d0d0d0, inset 0 0 0 #f8f8f8;
+    --portfolio-img-height: 300px;
 }
 
 /* override custom css varibles for dark theme */
@@ -41,11 +42,17 @@ body.dark{
     --inner-shadow-0: inset 0 0 0 #222327, inset 0 0 0 #363636;
 }
 
+html{
+   width: 100%;
+   overflow-x: hidden;
+}
+
 body{
    font-size: 16px;
    line-height: 1.5;
    overflow-x: hidden;
    background-color: var(--bg-black-50);
+   width: 100%;
 }
 
 body.hidden-scrolling{
@@ -80,17 +87,25 @@ ul{
 
 img{
     vertical-align: middle;
-    min-width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 .container{
     max-width: 1140px;
     margin: auto;
+    padding: 0 15px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .row{
     display: flex;
     flex-wrap: wrap;
+    margin: 0 -15px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .justify-content-between{
@@ -352,7 +367,7 @@ img{
 ---------------*/
 
 .header{
-    padding: 20px 15px;
+    padding: 15px 10px;
     position: absolute;
     width: 100%;
     top: 0;
@@ -544,8 +559,8 @@ img{
 }
 
 .home-section .full-screen{
-    padding: 50px 0;
-    min-height: 100vh;
+    padding: 80px 0 50px;
+    min-height: auto;
 }
 
 .home-section .home-text,
@@ -603,6 +618,32 @@ img{
     width: 100%;
     border-radius: 50%;
     border: 9px solid transparent;
+}
+
+.section-footer{
+    padding: 30px 15px 20px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-black-600);
+    font-style: italic;
+    border-top: 1px solid var(--border-color);
+    margin-top: 40px;
+}
+
+.section-footer p{
+    margin: 0;
+}
+
+.home-section .footer-content{
+    font-size: 14px;
+    color: var(--text-black-600);
+    font-style: italic;
+    padding: 20px;
+    border-top: 1px solid var(--bg-black-100);
+}
+
+.home-section .footer-content p{
+    margin: 0;
 }
 
 /*--------------------
@@ -727,10 +768,12 @@ img{
 }
 
 .about-section .skills .skills-item{
-    flex: 0 0 42%;
+    flex: 0 0 45%;
     max-width: 45%;
     padding: 0 15px;
-    margin: 30px;
+    margin: 15px 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .about-section .skills .skills-item p{
@@ -744,6 +787,8 @@ img{
     height: 20px;
     border-radius: 10px;
     position: relative;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .about-section .skills .skills-item .progress-bar{
@@ -753,16 +798,17 @@ img{
     top: 7px;
     position: absolute;
     border-radius: 10px;
+    box-sizing: border-box;
 }
 
 .about-section .skills .skills-item .progress-bar span{
     position: absolute;
-    right: 0;
-    top: 0;
-    font-size: 16px;
+    right: 5px;
+    top: -25px;
+    font-size: 14px;
     font-weight: 500;
     color: var(--text-black-600);
-    margin-top: -40px;
+    white-space: nowrap;
 }
 .about-section .education,
 .about-section .experience{
@@ -1038,7 +1084,11 @@ img{
 .portfolio-section .portfolio-item-img img{
     border-radius: 5px;
     width: 100%;
+    height: var(--portfolio-img-height);
+    object-fit: cover;
+    object-position: center;
     transition: all 0.3s ease;
+    display: block;
 }
 
 .portfolio-section .portfolio-item-inner:hover .portfolio-item-img img{
@@ -1047,6 +1097,10 @@ img{
 
 .portfolio-section .portfolio-item-img{
     position: relative;
+    width: 100%;
+    height: var(--portfolio-img-height);
+    overflow: hidden;
+    border-radius: 5px;
 }
 
 .portfolio-section .portfolio-item-img .view-project{
@@ -1187,19 +1241,27 @@ img{
     flex: 0 0 65%;
     max-width: 65%;
     padding: 0 15px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .portfolio-popup .description p{
     font-size: 16px;
     color: var(--text-black-600);
     line-height: 26px;
-    margin: 0;
+    margin: 0 0 12px;
+}
+
+.portfolio-popup .description p:last-child{
+    margin-bottom: 0;
 }
 
 .portfolio-popup .info{
     flex: 0 0 35%;
     max-width: 35%;
     padding: 0 15px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .portfolio-popup .info ul li{
@@ -1208,10 +1270,12 @@ img{
     font-weight: 600;
     color: var(--text-black-600);
     font-size: 16px;
+    word-wrap: break-word;
 }
 
 .portfolio-popup .info ul li span{
     font-weight: 400;
+    word-wrap: break-word;
 }
 
 .portfolio-popup .info ul li a{
@@ -1220,7 +1284,6 @@ img{
 
 .portfolio-popup .info ul li:last-child{
     margin-bottom: 0;
-
 }
 
 .portfolio-popup .separator{

@@ -174,15 +174,50 @@ function bodyScrollingToggle(){
     }
 
     function popupSlideshow(){
-      const imgSrc = screenshots[slideIndex];
+      const mediaSrc = screenshots[slideIndex];
       const popupImg = popup.querySelector(".pp-img");
-      /* activate loader until the popuImg loader */
+      const popupContainer = popup.querySelector(".pp-main-inner");
+      
+      /* activate loader until the media loads */
       popup.querySelector(".pp-loader").classList.add("active");
-      popupImg.src=imgSrc;
-      popupImg.onload = () =>{
-        // deactivate loader after the popupImg loaded 
-        popup.querySelector(".pp-loader").classList.remove("active");
+      
+      // Detectar si es video o imagen
+      if(mediaSrc.endsWith('.mp4') || mediaSrc.endsWith('.webm') || mediaSrc.endsWith('.ogg')){
+        // Es un video
+        let videoElement = popupContainer.querySelector("video");
+        
+        if(!videoElement){
+          // Crear elemento de video si no existe
+          videoElement = document.createElement("video");
+          videoElement.className = "pp-img outer-shadow";
+          videoElement.controls = true;
+          videoElement.width = 1200;
+          videoElement.height = 800;
+          popupImg.parentNode.replaceChild(videoElement, popupImg);
+        }
+        
+        videoElement.src = mediaSrc;
+        videoElement.onloadedmetadata = () =>{
+          popup.querySelector(".pp-loader").classList.remove("active");
+        }
       }
+      else{
+        // Es una imagen
+        let videoElement = popupContainer.querySelector("video");
+        if(videoElement){
+          // Reemplazar video con imagen si existe
+          const newImg = document.createElement("img");
+          newImg.className = "pp-img outer-shadow";
+          videoElement.parentNode.replaceChild(newImg, videoElement);
+          popupImg = newImg;
+        }
+        
+        popupImg.src = mediaSrc;
+        popupImg.onload = () =>{
+          popup.querySelector(".pp-loader").classList.remove("active");
+        }
+      }
+      
       popup.querySelector(".pp-counter").innerHTML = (slideIndex+1) + " of " + screenshots.length;
     }
 
